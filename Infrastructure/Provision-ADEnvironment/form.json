@@ -1,0 +1,12 @@
+{
+	"projectName": "DSC" ,
+	"projectOwner": "maxim.davidov@apps.teva",
+	"adminUsers":[
+		"Albert.Lieben@Apps.Teva",
+		"Alberto.Benedit@Apps.Teva"
+	],
+	"regularUsers":[
+		"AlbertoRamon.Franco03@Apps.Teva",
+		"Alejandro.Cotta@Apps.Teva"
+	]
+}

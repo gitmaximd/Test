@@ -1,0 +1,42 @@
+{
+    "if": {
+        "anyOf": [
+            {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "in": [
+                            "Microsoft.Compute/virtualMachines",
+                            "Microsoft.Compute/VirtualMachineScaleSets"
+                        ]
+                    },
+                    {
+                        "field": "Microsoft.Compute/licenseType",
+                        "exists": false
+                    },
+                    {
+                        "field": "Microsoft.Compute/virtualMachines/imagePublisher",
+                        "like": "Microsoft*"
+                    }
+                ]
+            },
+            {
+                "anyOf": [
+                    {
+                        "source": "action",
+                        "like": "Microsoft.Network/publicIPAddresses/*"
+                    },
+                    {
+                        "not": {
+                            "field": "location",
+                            "in": "[parameters('listOfAllowedLocations')]"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "then": {
+        "effect": "deny"
+    }
+}
