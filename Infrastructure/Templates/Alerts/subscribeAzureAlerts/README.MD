@@ -1,1 +1,1 @@
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https%3A%2F%2Fraw.githubusercontent.com%2Fgitmaximd%2FTest%2Fmaster%2FInfrastructure%2FTemplates%2FAlerts%2FsubscribeAzureAlerts%2Fazuredeploy.json)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https://github.com/gitmaximd/Test/blob/master/Infrastructure/Templates/Alerts/subscribeAzureAlerts/)
