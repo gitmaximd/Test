@@ -27,7 +27,7 @@
     },
     "activityLogAlertName": {
       "type": "string",
-      "defaultValue": "serviceHealthAlert",
+      "defaultValue": "1234",
       "minLength": 1,
       "metadata": {
         "description": "Name for the Activity log alert."
@@ -41,7 +41,7 @@
       "name": "[parameters('actionGroupName')]",
       "location": "global",
       "properties": {
-        "groupShortName": "[substring(uniquestring(parameters('emailAddress'),0,11))]",
+        "groupShortName": "[take(uniquestring(parameters('emailAddress')),12)]",
         "enabled": true,
         "smsReceivers": [
         ],
