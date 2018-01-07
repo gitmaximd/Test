@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "groupName":{
+        "type": "string"
+      },
+      "groupShortName": {
+        "type": "string"
+      },
+      "emailReceiversName": {
+          "type":"string",
+          "metadata": {
+              "description": "Name of the distribution list"
+          }
+      },
+      "emailReceiversAddress":{
+          "type": "string",
+          "metadata": {
+              "description": "Email address of the default distribution list"
+          }
+      }
+  },
+    "resources": [
+      {
+        "type": "Microsoft.Insights/actionGroups",
+        "apiVersion": "2017-04-01",
+        "name": "[parameters('groupName')]",
+        "location":"Global",
+        "properties": {
+          "groupShortName": "[parameters('groupShortName')]",
+          "enabled": true,
+          "emailReceivers": [
+            {
+              "name": "[parameters('emailReceiversName')]",
+              "emailAddress": "[parameters('emailReceiversAddress')]"
+            }
+          ]
+        }
+      }
+    ],
+    "outputs":{
+        "actionGroupId":{
+            "type":"string",
+            "value":"[resourceId('Microsoft.Insights/actionGroups',parameters('groupName'))]"
+        }
+    }
+  }
