@@ -1,0 +1,1 @@
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://raw.githubusercontent.com/gitmaximd/Test/master/Infrastructure/Templates/Alerts/subscribeAzureAlerts/azuredeploy.json)
