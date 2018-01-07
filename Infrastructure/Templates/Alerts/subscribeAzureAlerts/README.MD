@@ -1,1 +1,1 @@
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https://gitrepo.apps.teva/Azure/Automation/raw/master/Infrastructure/Templates/Alerts/subscribeAzureAlerts/)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://deploy.azure.com/?repository=https://github.com/gitmaximd/Test/blob/master/Infrastructure/Templates/Alerts/subscribeAzureAlerts/)
