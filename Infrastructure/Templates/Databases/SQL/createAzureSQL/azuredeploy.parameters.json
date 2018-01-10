@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sqlAdminPwdGuid": {
+      "value": "9656ebfb-b509-4633-9fa3-2139f2a43b7a"
+    },
+    "sqlAdminAccountGuid": {
+      "value": "7b7c623a-ecb7-4126-ba17-b06cb21c3012"
+    },
+    "guid": {
+      "value": "d18fb918-2415-402d-9556-e3b144ae4eed"
+    },
+    "sqlSrvNamePref": {
+      "value": ""
+    },
+    "sqlDbCollation": {
+      "value": "SQL_Latin1_General_CP1_CI_AS"
+    },
+    "sqlDbServicePlan": {
+      "value": "Standard"
+    },
+    "sqlDbServiceTier": {
+      "value": "S0"
+    },
+    "vnetName": {
+      "value": "AutomationLAB-vnet"
+    },
+    "subnetName": {
+      "value": "AutomationLAB-sub"
+    }
+  }
+}

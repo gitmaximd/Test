@@ -1,0 +1,128 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sqlSrvNamePref": {
+      "type": "string",
+      "metadata": {
+        "description": "The prefix that would be added to a SQL server name."
+      }
+    },
+    "sqlAdminPwdGuid": {
+      "type": "string"
+    },
+    "sqlAdminAccountGuid": {
+      "type": "string"
+    },
+    "guid":{
+      "type": "string"
+    },
+    "sqlDbCollation":{
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "The collation of an initial SQL database."
+      }
+    },
+    "sqlDbServicePlan": {
+      "type": "string",
+      "metadata": {
+        "description": "The edition of a database.",
+        "comments": "Possible values are: Web, Business, Basic, Standard, Premium, PremiumRS, Free, Stretch, DataWarehouse, System, System2"
+      }
+    },
+    "sqlDbServiceTier": {
+      "type": "string"
+    },
+    "vnetName": {
+      "type": "string"
+    },
+    "subnetName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "secSqlAdminAccount": "[concat('adm',uniquestring(resourceGroup().id,parameters('sqlAdminAccountGuid')))]",
+    "secSqlServerPwd": "[concat('Z',uniquestring(resourceGroup().id,parameters('sqlAdminPwdGuid')),'@','k')]",
+    "sqlServerName": "[concat(parameters('sqlSrvNamePref'), uniqueString(resourceGroup().id, parameters('guid')))]",
+    "sqlDbName": "[concat('db-',variables('sqlServerName'))]",
+    "vnetId": "[resourceid('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
+    "subnetId": "[concat(variables('vnetId'),'/subnets/',parameters('subnetName'))]"
+    
+  },
+  "resources": [
+    {
+      "apiVersion": "2014-04-01-preview",
+      "dependsOn": [],
+      "location": "[resourceGroup().location]",
+      "name": "[variables('sqlServerName')]",
+      "properties": {
+        "administratorLogin": "[variables('secSqlAdminAccount')]",
+        "administratorLoginPassword": "[variables('secSqlServerPwd')]"
+      },
+      "resources": [
+        {
+          "name": "AllowAllWindowsAzureIps",
+          "type": "firewallrules",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+          ],
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "0.0.0.0"
+          }
+        },
+        {
+          "name": "[variables('sqlDbName')]",
+          "type": "databases",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2014-04-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+          ],
+          "tags": {
+            "displayName": "[variables('sqlDbName')]"
+          },
+          "properties": {
+            "collation": "[parameters('sqlDbCollation')]",
+            "edition": "[parameters('sqlDbServicePlan')]",
+            "maxSizeBytes": "10737418240",
+            "requestedServiceObjectiveName": "[parameters('sqlDbServiceTier')]"
+          }
+        },
+        {
+          "name": "svcendpoint",
+          "type": "virtualNetworkRules",
+          "apiVersion": "2015-05-01-preview",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', variables('sqlServerName'))]"
+          ],
+          "properties": {
+            "virtualNetworkSubnetId": "[variables('subnetId')]",
+            "ignoreMissingVnetServiceEndpoint": true
+          }
+        }
+      ],
+      "tags": {
+        "displayName": "[variables('sqlServerName')]"
+      },
+      "type": "Microsoft.Sql/servers"
+    } 
+    ],
+  "outputs": {
+    "sqlServerFQDN": {
+      "type": "string",
+      "value": "[reference(variables('sqlServerName')).fullyQualifiedDomainName]"
+    },
+    "dbADONETConnString": {
+      "type": "string",
+      "value": "[concat('Server=tcp:',reference(variables('sqlServerName')).fullyQualifiedDomainName,',1433;Initial Catalog=',variables('sqlDbName'),';Persist Security Info=False;User ID=',reference(variables('sqlServerName')).administratorLogin,';Password=',reference(variables('sqlServerName')).administratorLoginPassword,';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;')]"
+    },
+    "dbJDBCConnString": {
+      "type": "string",
+      "value": "[concat('jdbc:sqlserver://',reference(variables('sqlServerName')).fullyQualifiedDomainName,':1433;database=',variables('sqlDbName'),';user=',reference(variables('sqlServerName')).administratorLogin,'@',variables('sqlDbName'),';password=',reference(variables('sqlServerName')).administratorLoginPassword,';encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;')]"
+    }
+  }
+}
