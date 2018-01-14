@@ -1,3 +1,12 @@
-{
-   "emailAddress":"maxim.davidov@teva.co.il"
+{  
+   "emailAddress":"TEST@EMAIL.COM",
+   "actionGroupName":{  
+      "value":"Leonid Belenky"
+   },
+   "logCategory":{  
+      "value":"Maintenance"
+   },
+   "activityLogAlertName":{  
+      "value":"MaintAlert123"
+   }
 }
