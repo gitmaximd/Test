@@ -1,14 +1,14 @@
 {
-  "emailAddress": {
-	"value": "leonid.belenky@teva.co.il"
-  },
-	"actionGroupName": {
-	  "value": "Leonid Belenky"
-	},
-	  "logCategory": {
-		"value": "Maintenance"
-	  },
-		"activityLogAlertName": {
-		  "value": "MaintAlert123"
-		}
+   "emailAddress": {
+      "value": "maxim.davidov@teva.co.il"
+    },
+    "actionGroupName": {
+      "value": "Maxim Davidov"
+    },
+    "logCategory": {
+      "value": "Maintenance"
+    },
+    "activityLogAlertName": {
+      "value": "MaintAlert123"
+    }
 }
