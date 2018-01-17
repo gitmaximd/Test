@@ -1,14 +1,30 @@
 {
-   "emailAddress": {
-      "value": "maxim.davidov@teva.co.il"
+    "impactedServices": {
+      "value": "properties.impactedServices[?(@.ServiceName == 'App Service \\\\ Web Apps' || @.ServiceName == 'Azure Active Directory' || @.ServiceName == 'HDInsight' || @.ServiceName == 'Key Vault' || @.ServiceName == 'Load Balancer' || @.ServiceName == 'Microsoft Azure portal' || @.ServiceName == 'Network Infrastructure' || @.ServiceName == 'Redis Cache' || @.ServiceName == 'SQL Database' || @.ServiceName == 'Storage' || @.ServiceName == 'Virtual Machine Scale Sets' || @.ServiceName == 'Virtual Machines' || @.ServiceName == 'Virtual Network' || @.ServiceName == 'Visual Studio Application Insights' || @.ServiceName == 'Visual Studio Team Services')].ImpactedRegions[*].RegionName"
+    },
+    "emailAddress": {
+
+      "value": ""
+
     },
     "actionGroupName": {
-      "value": "Maxim Davidov"
-    },
-    "incidentType": {
-      "value": "Maintenance"
+
+      "value": ""
+
     },
     "activityLogAlertName": {
-      "value": "MaintAlert123"
+
+      "value": ""
+
+    },
+    "incidentType": {
+      "value": ""
+    },
+    "impactedRegions": {
+        "value": [
+            "East US",
+            "East US 2",
+            "West US"
+        ]
     }
 }
