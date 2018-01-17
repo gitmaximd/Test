@@ -21,9 +21,9 @@
       "value": "S0"
     },
     "vnetName": {
-      "value": "AutomationLAB-vnet"
+      "value": "tevavravirtualnetwork"
     },
     "subnetName": {
-      "value": "AutomationLAB-sub"
+      "value": "default"
     }
 }
