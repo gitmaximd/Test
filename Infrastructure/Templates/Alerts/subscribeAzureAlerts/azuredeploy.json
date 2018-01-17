@@ -19,6 +19,12 @@
         "description": "Type of the events to subscribe to"
       }
     },
+    "impactedServices": {
+      "type": "string"
+    },
+    "impactedRegions": {
+      "type": "array"
+    },
     "emailAddress": {
       "type": "string",
       "metadata": {
@@ -27,12 +33,24 @@
     },
     "activityLogAlertName": {
       "type": "string",
-      "defaultValue": "1234",
       "minLength": 1,
       "metadata": {
         "description": "Name for the Activity log alert."
       }
+    },
+    "incidentType": {
+      "type": "string",
+      "allowedValues": [
+        "Maintenance",
+        "Incident"
+      ],
+      "metadata": {
+        "description": "Name of the incident"
+      }
     }
+  },
+  "variables": {
+    "actionGroupResourceId": "[replace(resourceid('Microsoft.Insights/actionGroups',parameters('actionGroupName')),' ','%20')]"
   },
   "resources": [
     {
@@ -47,7 +65,7 @@
         ],
         "emailReceivers": [
           {
-            "name": "emailReceiver",
+            "name": "[parameters('actionGroupName')]",
             "emailAddress": "[parameters('emailAddress')]"
           }
         ]
@@ -59,7 +77,7 @@
       "name": "[parameters('activityLogAlertName')]",
       "location": "global",
       "dependsOn": [
-        "[parameters('actionGroupName')]"
+        "[resourceId('Microsoft.Insights/actionGroups',parameters('actionGroupName'))]"
       ],
       "properties": {
         "enabled": true,
@@ -71,13 +89,28 @@
             {
               "field": "Category",
               "equals": "[parameters('logCategory')]"
+            },
+            {
+              "field": "properties.stage",
+              "equals": "Active",
+              "containsAny": null
+            },
+            {
+              "field": "properties.incidentType",
+              "equals": "[parameters('logCategory')]",
+              "containsAny": null
+            },
+            {
+              "field": "[parameters('impactedServices')]",
+              "equals": null,
+              "containsAny": "[parameters('impactedRegions')]"
             }
           ]
         },
         "actions": {
           "actionGroups": [
             {
-              "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', parameters('actionGroupName'))]"
+              "actionGroupId": "[variables('actionGroupResourceId')]"
             }
           ]
         }
