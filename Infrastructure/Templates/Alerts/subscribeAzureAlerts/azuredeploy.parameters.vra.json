@@ -1,5 +1,4 @@
 {
-  "parameters": {
     "impactedServices": {
       "value": "properties.impactedServices[?(@.ServiceName == 'App Service \\\\ Web Apps' || @.ServiceName == 'Azure Active Directory' || @.ServiceName == 'HDInsight' || @.ServiceName == 'Key Vault' || @.ServiceName == 'Load Balancer' || @.ServiceName == 'Microsoft Azure portal' || @.ServiceName == 'Network Infrastructure' || @.ServiceName == 'Redis Cache' || @.ServiceName == 'SQL Database' || @.ServiceName == 'Storage' || @.ServiceName == 'Virtual Machine Scale Sets' || @.ServiceName == 'Virtual Machines' || @.ServiceName == 'Virtual Network' || @.ServiceName == 'Visual Studio Application Insights' || @.ServiceName == 'Visual Studio Team Services')].ImpactedRegions[*].RegionName"
     },
@@ -28,5 +27,4 @@
             "West US"
         ]
     }
-  }
 }
