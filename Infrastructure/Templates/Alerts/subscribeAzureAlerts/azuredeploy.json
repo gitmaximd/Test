@@ -9,16 +9,6 @@
         "description": "Name for the Action group."
       }
     },
-    "logCategory": {
-      "type": "string",
-      "allowedValues": [
-        "Maintenance",
-        "ServiceHealth"
-      ],
-      "metadata": {
-        "description": "Type of the events to subscribe to"
-      }
-    },
     "impactedServices": {
       "type": "string"
     },
@@ -88,7 +78,7 @@
           "allOf": [
             {
               "field": "Category",
-              "equals": "[parameters('logCategory')]"
+              "equals": "[parameters('incidentType')]"
             },
             {
               "field": "properties.stage",
@@ -97,7 +87,7 @@
             },
             {
               "field": "properties.incidentType",
-              "equals": "[parameters('logCategory')]",
+              "equals": "[parameters('incidentType')]",
               "containsAny": null
             },
             {

@@ -2,18 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "emailAddress": {
-      "value": "maxim.davidov@teva.co.il"
-    },
-    "actionGroupName": {
-      "value": "Maxim Davidov"
-    },
-    "logCategory": {
-      "value": "Maintenance"
-    },
-    "activityLogAlertName": {
-      "value": "MyAlertLog"
-    },
     "impactedServices": {
       "value": "properties.impactedServices[?(@.ServiceName == 'App Service \\\\ Web Apps' || @.ServiceName == 'Azure Active Directory' || @.ServiceName == 'HDInsight' || @.ServiceName == 'Key Vault' || @.ServiceName == 'Load Balancer' || @.ServiceName == 'Microsoft Azure portal' || @.ServiceName == 'Network Infrastructure' || @.ServiceName == 'Redis Cache' || @.ServiceName == 'SQL Database' || @.ServiceName == 'Storage' || @.ServiceName == 'Virtual Machine Scale Sets' || @.ServiceName == 'Virtual Machines' || @.ServiceName == 'Virtual Network' || @.ServiceName == 'Visual Studio Application Insights' || @.ServiceName == 'Visual Studio Team Services')].ImpactedRegions[*].RegionName"
     },
